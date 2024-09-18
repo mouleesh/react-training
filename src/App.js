@@ -1,25 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import PTagComponent from './PTagComponent';
+import { useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [fullName, changeFullName] = useState({
+		firstName: "",
+		lastName: ""
+	});
+
+	const handleChange = (e) => {
+		changeFullName({
+			...fullName,
+			[e.target.name]: e.target.value
+		});
+	}
+
+	return (
+		<div className="App">
+			<label> Frist Name: <input type="text" name="firstName" onChange={handleChange}/> </label>
+			<label> Last Name: <input type="text" name="lastName" onChange={handleChange}/> </label>
+			
+			<PTagComponent 
+				name={`${fullName.firstName} ${fullName.lastName}`} 
+				age={26} 
+			/>
+		</div>
+	);
 }
 
 export default App;
