@@ -33,5 +33,6 @@ export default function Login(){
         <label>Password: <input name="password" value={userObj.password} type="password" onChange={handleChange}/> </label>
         <br/>
         <button onClick={handleSubmission}>Login</button>
+        <p>{userObj.username}</p>
     </>
 }
