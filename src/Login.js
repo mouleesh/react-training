@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 const userCredentials ={
     user: "avinash",
@@ -12,6 +12,24 @@ export default function Login(){
         password: ""
     });
 
+    // useEffect(()=>{
+    //     console.log("I am being triggerd unwantedly");
+    // });
+
+    useEffect(()=>{
+        console.log("Component has been mounted")
+
+        //Make an API call upon Mounting.
+
+        return () => {
+            console.log("Component will unmount");
+        }
+    }, []);
+
+    useEffect(()=>{
+        console.log("Component has been updated")
+    }, [userObj]);
+
     const handleChange = (event) => {
        setUserObj({
             ...userObj,
@@ -21,7 +39,7 @@ export default function Login(){
 
     const handleSubmission = () => {
         if(userObj.username === userCredentials.user && userObj.password === userCredentials.pass){
-            alert("Successfully Logged In.");
+            alert("Login Success.")
         } else {
             alert("Oops! Authentication Failed.")
         }
