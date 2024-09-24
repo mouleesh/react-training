@@ -8,6 +8,9 @@ import Login from './Login';
 import Register from './Register';
 import ErrorComp from './ErrorComp';
 import { GrandFather } from './context/GrandFather';
+import Dashboard from './Dashboard';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
 const routes = createBrowserRouter([
   {
@@ -30,16 +33,21 @@ const routes = createBrowserRouter([
     element: "This is a public layout"
   },
   {
-    path: "grand-father",
+    path: "/grand-father",
     element: <GrandFather />
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />
   }
-
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={routes} />
+    <Provider store={store}>
+      <RouterProvider router={routes} />
+    </Provider>
   </React.StrictMode>
 );
 

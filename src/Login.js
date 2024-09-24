@@ -1,9 +1,17 @@
 import React, {useEffect, useState} from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { updatePassword, updateUsername } from "./redux/userSlice";
+import Dashboard from "./Dashboard";
 
-const userCredentials ={
-    user: "avinash",
-    pass: "avinash@123"
-}
+const userCredentials = [{
+        user: "avinash",
+        pass: "123"
+    },{
+        user: "ramesh",
+        pass: "123"
+    }
+]
 
 export default function Login(){
 
@@ -11,6 +19,9 @@ export default function Login(){
         username: "",
         password: ""
     });
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // useEffect(()=>{
     //     console.log("I am being triggerd unwantedly");
@@ -31,15 +42,26 @@ export default function Login(){
     }, [userObj]);
 
     const handleChange = (event) => {
-       setUserObj({
-            ...userObj,
-            [event.target.name]: event.target.value
-       })
+        if(event.target.name === "username"){
+            dispatch(updateUsername(event.target.value))
+        } else {
+            dispatch(updatePassword(event.target.value))
+        }
+
+        setUserObj({
+                ...userObj,
+                [event.target.name]: event.target.value
+        })
     }
 
     const handleSubmission = () => {
-        if(userObj.username === userCredentials.user && userObj.password === userCredentials.pass){
+        const foundUser = userCredentials.find(userCred => {
+            return userCred.user === userObj.username
+        })
+
+        if(foundUser && foundUser.pass === userObj.password){
             alert("Login Success.")
+            navigate('/dashboard')
         } else {
             alert("Oops! Authentication Failed.")
         }
