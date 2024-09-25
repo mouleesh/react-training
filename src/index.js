@@ -9,8 +9,9 @@ import Register from './Register';
 import ErrorComp from './ErrorComp';
 import { GrandFather } from './context/GrandFather';
 import Dashboard from './Dashboard';
-import store from './redux/store';
 import { Provider } from 'react-redux';
+import store from './redux/store';
+import Todo from './network/Todo';
 
 const routes = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const routes = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Dashboard />
+  },
+  {
+    path: '/todo',
+    element: <Todo />
   }
 ])
 
