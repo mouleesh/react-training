@@ -12,6 +12,7 @@ import Dashboard from './Dashboard';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import Todo from './network/Todo';
+import Bidding from './hoc/Bidding';
 
 const routes = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const routes = createBrowserRouter([
   {
     path: '/todo',
     element: <Todo />
+  },
+  {
+    path: '/bidding',
+    element: <Bidding />
   }
 ])
 
