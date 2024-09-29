@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 export default function Todo(){
 
@@ -17,6 +17,15 @@ export default function Todo(){
         getTodos();
     }, [])
 
+    const makeCapital = (tods) => {
+        return tods.map(t => ({
+            ...t,
+            title: t.title.toUpperCase()
+        }));
+    }
+
+    const capitalTodos = useMemo(() => {return makeCapital(todos)}, [todos]);
+
     const handleButtonClick = () => {
         axios.post("https://jsonplaceholder.typicode.com/posts/", {name: "Prabu", age: 14})
         .then((res) => {
@@ -31,6 +40,6 @@ export default function Todo(){
 
     return <>
         <button onClick={handleButtonClick}>HIT Backend</button>
-        {todos.map((tod) => <p key={tod.id}>{tod.title}</p>)}
+        {capitalTodos.map((tod) => <li key={tod.id}>{tod.title}</li>)}
     </>
 }
