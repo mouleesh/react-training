@@ -8,6 +8,7 @@ const userSlice = createSlice({
   },
   reducers: {
     updateUsername: (state, data) => {
+        
         state.username = data.payload
     },
     updatePassword: (state, data) => {

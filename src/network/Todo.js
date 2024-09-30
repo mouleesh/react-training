@@ -1,9 +1,16 @@
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react"
+import { getTodosRedux } from "../redux/todoSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Todo(){
 
     const [todos, setTodos] = useState([]);
+    const {data: todosFromSlice} = useSelector((state) => state.todo) 
+
+    console.log(todosFromSlice, "todos");
+    
+    const dispatch = useDispatch();
 
     const getTodos = async () => {
         const response = await axios.get("https://jsonplaceholder.typicode.com/todos/");
@@ -15,6 +22,7 @@ export default function Todo(){
 
     useEffect(()=> {
         getTodos();
+        dispatch(getTodosRedux());
     }, [])
 
     const makeCapital = (tods) => {
