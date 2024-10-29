@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import Todo from './network/Todo';
 import Bidding from './hoc/Bidding';
+import Counter from './hooks/Counter';
 
 const routes = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const routes = createBrowserRouter([
   {
     path: '/bidding',
     element: <Bidding />
+  },
+  {
+    path: '/custom-hook',
+    element: <Counter />
   }
 ])
 

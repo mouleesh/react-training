@@ -2,28 +2,28 @@ import axios from "axios";
 import { useEffect, useMemo, useState } from "react"
 import { getTodosRedux } from "../redux/todoSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useApi } from "../hooks/useApi";
 
 export default function Todo(){
 
-    const [todos, setTodos] = useState([]);
-    const {data: todosFromSlice} = useSelector((state) => state.todo) 
+    // const [todos, setTodos] = useState([]);
+    const [todos] = useApi("https://jsonplaceholder.typicode.com/todos/");
+    console.log(todos);
+    // const {data: todosFromSlice} = useSelector((state) => state.todo) 
 
-    console.log(todosFromSlice, "todos");
     
     const dispatch = useDispatch();
 
-    const getTodos = async () => {
-        const response = await axios.get("https://jsonplaceholder.typicode.com/todos/");
-        // .then((res) => {
-        //     setTodos(res.data)
-        // })
-        setTodos(response.data);
-    }
+    // const getTodos = async () => {
+    //     const response = await axios.get(url);
+    //     setTodos(response.data);
+    // }
 
-    useEffect(()=> {
-        getTodos();
-        dispatch(getTodosRedux());
-    }, [])
+    // useEffect(()=> {
+    //     getTodos();
+
+    //     dispatch(getTodosRedux());
+    // }, [])
 
     const makeCapital = (tods) => {
         return tods.map(t => ({

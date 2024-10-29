@@ -49,8 +49,8 @@ export default function Login(){
         }
 
         setUserObj({
-                ...userObj,
-                [event.target.name]: event.target.value
+            ...userObj,
+            [event.target.name]: event.target.value
         })
     }
 
